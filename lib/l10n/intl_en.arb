@@ -1,0 +1,10 @@
+{
+  "titleLang": "Language",
+  "email": "Email",
+  "password": "Password",
+  "signIn": "Sign In",
+  "SignUp": "Sign Up",
+  "or": "Or",
+  "google": "SignIn With Google",
+  "facebook": "SignIn With Facebook"
+}
