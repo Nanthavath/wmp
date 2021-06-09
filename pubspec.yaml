@@ -38,11 +38,11 @@ flutter:
 
 
   # example:
-#  fonts:
-#     - family: NotoSandsLao
-#       fonts:
-#         - asset: assets/fonts/NotoSansLao-Regular.ttf
-#         - asset: assets/fonts/NotoSandsLao-Bold.ttf
+  fonts:
+     - family: NotoSandsLao
+       fonts:
+         - asset: assets/fonts/NotoSansLao-Regular.ttf
+         - asset: assets/fonts/NotoSansLao-Bold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

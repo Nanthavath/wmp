@@ -6,18 +6,18 @@ class TextFields extends StatelessWidget {
       this.hint,
       this.textInputType,
       this.controller,
-      this.icon,
+      this.prefixIcon,
       this.secure,
       this.onTap,
       this.onChanged})
       : super(key: key);
   final String? hint;
   final TextEditingController? controller;
-  final IconData? icon;
+  final IconData? prefixIcon;
   final bool? secure;
   final TextInputType? textInputType;
-  final GestureTapCallback? onTap;
   final ValueChanged<String>? onChanged;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +33,17 @@ class TextFields extends StatelessWidget {
           border: OutlineInputBorder(
             borderSide: BorderSide(),
           ),
-          prefixIcon: Icon(icon),
-          suffixIcon: controller!.text == "" || controller!.text.isEmpty
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 0.5),
+          ),
+          prefixIcon: Icon(prefixIcon,size: 25,),
+          contentPadding: EdgeInsets.only(top: 5,bottom: 5,right: 10),
+          suffixIcon: controller!.text.isEmpty || controller!.text == ""
               ? Container(
                   width: 1,
                 )
               : InkWell(
-                  child: Icon(Icons.close),
+                  child: Icon(Icons.clear),
                   onTap: onTap,
                 ),
         ),

@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
 class LocaleProvider extends ChangeNotifier {
-  Locale? _locale;
+  Locale _currentLocale=Locale('en');
 
-  Locale get locale => _locale!;
+  Locale get currentLocale=>_currentLocale;
 
-  void setLocale(Locale locale) {}
+  void changeLocale(String _locale){
+    this.._currentLocale=Locale(_locale);
+    notifyListeners();
+  }
 }

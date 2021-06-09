@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wmp/generated/l10n.dart';
-import 'package:wmp/localization/language_constants.dart';
 import 'package:wmp/main.dart';
+import 'package:wmp/providers/local_provider.dart';
 import 'package:wmp/screens/authen/sign_up.dart';
 import 'package:wmp/utils/constants.dart';
 import 'package:wmp/utils/language.dart';
 import 'package:wmp/widgets/dialog_widget.dart';
+import 'package:provider/provider.dart';
 
 import 'components/text_field.dart';
 
@@ -21,7 +22,9 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
   bool secure = false;
 
-  _changeLanguage(Language language) async {}
+  _changeLanguage(Language language) async {
+    context.read<LocaleProvider>().changeLocale(language.languageCode);
+  }
 
   @override
   Widget build(BuildContext context) {
