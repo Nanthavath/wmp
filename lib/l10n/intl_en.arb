@@ -6,5 +6,8 @@
   "SignUp": "Sign Up",
   "or": "Or",
   "google": "SignIn With Google",
-  "facebook": "SignIn With Facebook"
+  "facebook": "SignIn With Facebook",
+  "name": "Name",
+  "show": "Show password",
+  "signUp": "Sign Up"
 }

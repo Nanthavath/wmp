@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wmp/generated/l10n.dart';
 import 'package:wmp/main.dart';
 import 'package:wmp/providers/local_provider.dart';
@@ -23,6 +24,9 @@ class _SignInState extends State<SignIn> {
   bool secure = false;
 
   _changeLanguage(Language language) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    await sharedPreferences.setString(LOCALE_PRE, language.languageCode);
     context.read<LocaleProvider>().changeLocale(language.languageCode);
   }
 

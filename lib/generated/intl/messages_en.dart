@@ -26,9 +26,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "facebook":
             MessageLookupByLibrary.simpleMessage("SignIn With Facebook"),
         "google": MessageLookupByLibrary.simpleMessage("SignIn With Google"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "or": MessageLookupByLibrary.simpleMessage("Or"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "show": MessageLookupByLibrary.simpleMessage("Show password"),
         "signIn": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "titleLang": MessageLookupByLibrary.simpleMessage("Language")
       };
 }

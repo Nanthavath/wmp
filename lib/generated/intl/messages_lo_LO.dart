@@ -27,9 +27,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "ເຂົ້າສູ່ລະບົບໂດຍບັນຊີ Facebook"),
         "google": MessageLookupByLibrary.simpleMessage(
             "ເຂົ້າສູ່ລະບົບໂດຍບັນຊີ Google"),
+        "name": MessageLookupByLibrary.simpleMessage("ຊື່"),
         "or": MessageLookupByLibrary.simpleMessage("ຫຼື"),
         "password": MessageLookupByLibrary.simpleMessage("ລະຫັດຜ່ານ"),
+        "show": MessageLookupByLibrary.simpleMessage("ສະແດງລະຫັດຜ່ານ"),
         "signIn": MessageLookupByLibrary.simpleMessage("ເຂົ້າສູ່ລະບົບ"),
+        "signUp": MessageLookupByLibrary.simpleMessage("ລົງທະບຽນ"),
         "titleLang": MessageLookupByLibrary.simpleMessage("ພາສາ")
       };
 }
