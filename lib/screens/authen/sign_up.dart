@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wmp/generated/l10n.dart';
-import 'package:wmp/screens/home/components/main_screen.dart';
 import 'package:wmp/screens/home/main_screen.dart';
 import 'package:wmp/utils/constants.dart';
 

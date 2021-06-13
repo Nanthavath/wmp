@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wmp/screens/home/components/hospital.dart';
-import 'package:wmp/screens/home/components/main_screen.dart';
 import 'package:wmp/screens/home/components/slide_menu.dart';
+
+import 'covers/cover.dart';
+import 'nearby/nearby.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -13,8 +14,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   final List<Widget> tabs = [
-    Container(),
-    Container(),
+    Cover(),
+    NearBy(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,10 @@ class _MainScreenState extends State<MainScreen> {
           bottom: TabBar(
             tabs: [
               Tab(
-                text: 'Home',
+                text: 'Cover',
               ),
               Tab(
-                text: 'Hospital',
+                text: 'Nearby',
               )
             ],
           ),
