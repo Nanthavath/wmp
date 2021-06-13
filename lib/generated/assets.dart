@@ -4,6 +4,7 @@ class Assets {
 
   static const String fontsNotoSansLaoBold = 'assets/fonts/NotoSansLao-Bold.ttf';
   static const String fontsNotoSansLaoRegular = 'assets/fonts/NotoSansLao-Regular.ttf';
+  static const String iconsIcons8Plus = 'assets/icons/icons8_plus.svg';
   static const String imagesFacebook = 'assets/images/facebook.png';
   static const String imagesGoogle = 'assets/images/google.png';
   static const String imagesIcons8FacebookMessenger480px = 'assets/images/icons8_facebook_messenger_480px.png';
