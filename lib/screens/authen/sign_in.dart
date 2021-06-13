@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wmp/bloc/locale_lang/locale_lang_bloc.dart';
 import 'package:wmp/generated/l10n.dart';
 import 'package:wmp/main.dart';
-import 'package:wmp/providers/local_provider.dart';
 import 'package:wmp/screens/authen/sign_up.dart';
 import 'package:wmp/utils/constants.dart';
 import 'package:wmp/utils/language.dart';
@@ -19,129 +20,144 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  ///Field
+  LocaleLangBloc? _localeLangBloc;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool secure = false;
 
-  _changeLanguage(Language language) async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    await sharedPreferences.setString(LOCALE_PRE, language.languageCode);
-    context.read<LocaleProvider>().changeLocale(language.languageCode);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
-        backgroundColor: backgroundColor,
-        elevation: 0.0,
-        actions: [
-          Padding(
-            padding: EdgeInsets.all(8),
-            child: DropdownButton(
-              onChanged: (Language? language) {
-                _changeLanguage(language!);
-              },
-              underline: SizedBox(),
-              icon: Container(
-                padding: EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: const BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.language,
-                    ),
-                    Text(S.of(context).titleLang),
-                    Icon(Icons.arrow_drop_down),
-                  ],
-                ),
-              ),
-              items: Language.languageList()
-                  .map<DropdownMenuItem<Language>>(
-                    (lang) => DropdownMenuItem(
-                      value: lang,
+    _localeLangBloc = BlocProvider.of<LocaleLangBloc>(context);
+    return BlocBuilder(
+      bloc: _localeLangBloc,
+      builder: (context, state) {
+        if (state is InitialLocaleLangState) {
+          _localeLangBloc!.add(LocaleLoadEvent());
+        }
+        if (state is LocaleLoadedState) {
+          return Scaffold(
+            backgroundColor: backgroundColor,
+            appBar: AppBar(
+              backgroundColor: backgroundColor,
+              elevation: 0.0,
+              actions: [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: DropdownButton(
+                    onChanged: (Language? language) {
+                      _localeLangBloc!
+                          .add(LocaleChangeEvent(language!.languageCode));
+                    },
+                    underline: SizedBox(),
+                    icon: Container(
+                      padding: EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                      ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(lang.flag),
-                          SizedBox(
-                            width: 5,
+                          Icon(
+                            Icons.language,
                           ),
-                          Text(lang.name),
+                          Text(S.of(context).titleLang),
+                          Icon(Icons.arrow_drop_down),
                         ],
                       ),
                     ),
-                  )
-                  .toList(),
-            ),
-          )
-        ],
-      ),
-      body: SafeArea(
-        child: Container(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/logo.png'),
-                    width: 250,
+                    items: Language.languageList()
+                        .map<DropdownMenuItem<Language>>(
+                          (lang) => DropdownMenuItem(
+                            value: lang,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(lang.flag),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(lang.name),
+                              ],
+                            ),
+                          ),
+                        )
+                        .toList(),
                   ),
-                  Form(
+                )
+              ],
+            ),
+            body: SafeArea(
+              child: Container(
+                child: SingleChildScrollView(
+                  child: Center(
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // TextFields(
-                        //   hint: 'Test',
-                        //   secure: false,
-                        //   onTap: () {},
-                        //   onChanged: (value) {},
-                        //   controller: emailController,
-                        //   icon: Icons.email,
-                        //
-                        //
-                        // ),
-                        _textInput(
-                          secure: false,
-                          hint: '${S.of(context).email}',
-                          controller: emailController,
-                          icon: Icons.email,
-                          textInputType: TextInputType.emailAddress,
+                        Image(
+                          image: AssetImage('assets/images/logo.png'),
+                          width: 250,
                         ),
-                        _textInput(
-                          secure: true,
-                          hint: '${S.of(context).password}',
-                          controller: passwordController,
-                          icon: Icons.lock,
-                        ),
-                        _signInButton(),
-                        _signUpButton(),
-                        Text('${S.of(context).or}'),
-                        _signInOption(
-                          img: "assets/images/google.png",
-                          title: '${S.of(context).google}',
-                          onTap: () {},
-                        ),
-                        _signInOption(
-                          img: "assets/images/facebook.png",
-                          title: '${S.of(context).facebook}',
-                          onTap: () {},
+                        Form(
+                          child: Column(
+                            children: [
+                              // TextFields(
+                              //   hint: 'Test',
+                              //   secure: false,
+                              //   onTap: () {},
+                              //   onChanged: (value) {},
+                              //   controller: emailController,
+                              //   icon: Icons.email,
+                              //
+                              //
+                              // ),
+                              _textInput(
+                                secure: false,
+                                hint: '${S.of(context).email}',
+                                controller: emailController,
+                                icon: Icons.email,
+                                textInputType: TextInputType.emailAddress,
+                              ),
+                              _textInput(
+                                secure: true,
+                                hint: '${S.of(context).password}',
+                                controller: passwordController,
+                                icon: Icons.lock,
+                              ),
+                              _signInButton(),
+                              _signUpButton(),
+                              Text('${S.of(context).or}'),
+                              _signInOption(
+                                img: "assets/images/google.png",
+                                title: '${S.of(context).google}',
+                                onTap: () {},
+                              ),
+                              _signInOption(
+                                img: "assets/images/facebook.png",
+                                title: '${S.of(context).facebook}',
+                                onTap: () {},
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
+          );
+        }
+        return Container(
+          color: backgroundColor,
+          child: Center(
+            child: CircularProgressIndicator(),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wmp/generated/l10n.dart';
+import 'package:wmp/screens/home/components/main_screen.dart';
+import 'package:wmp/screens/home/main_screen.dart';
 import 'package:wmp/utils/constants.dart';
 
 import 'components/text_field.dart';
@@ -17,7 +19,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool secure = true;
-  bool isChecked=false;
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -108,11 +110,11 @@ class _SignUpState extends State<SignUp> {
           value: isChecked,
           onChanged: (bool? value) {
             setState(() {
-              isChecked=value!;
+              isChecked = value!;
               if (secure) {
-                secure=false;
-              }else{
-                secure=true;
+                secure = false;
+              } else {
+                secure = true;
               }
             });
           },
@@ -124,12 +126,18 @@ class _SignUpState extends State<SignUp> {
 
   _signUpButton() {
     return Container(
-      margin: EdgeInsets.only(left: 20,right: 20),
+      margin: EdgeInsets.only(left: 20, right: 20),
       child: Row(
         children: [
           Expanded(
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => MainScreen(),
+                    ),
+                    (route) => false);
+              },
               child: Text("${S.of(context).SignUp}"),
             ),
           ),
